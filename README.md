@@ -16,7 +16,7 @@ A central hub of productivity utilities for Chrome. Includes features like:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/chrome_extensions_PROJECT.git
+   git clone https://github.com/silviorodrigues98/chrome_extensions_PROJECT
    ```
 
 2. Open Chrome and navigate to `chrome://extensions/`
