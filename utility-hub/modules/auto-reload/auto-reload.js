@@ -4,6 +4,7 @@
 const AutoReloadModule = (function () {
     let currentTabId;
     let countdownInterval;
+    let selectedInterval = 60;
 
     const playIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`;
     const stopIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12"></rect></svg>`;
@@ -19,10 +20,9 @@ const AutoReloadModule = (function () {
         chrome.storage.local.get([key], (result) => {
             const data = result[key] || {};
             const isActive = data.active || false;
-            const interval = data.interval || 60;
             const hardReload = data.hardReload || false;
+            selectedInterval = interval;
 
-            document.getElementById('interval').value = interval;
             document.getElementById('hardReload').checked = hardReload;
 
             updatePresetActive(interval);
@@ -109,7 +109,7 @@ const AutoReloadModule = (function () {
     }
 
     function start(key) {
-        const interval = parseInt(document.getElementById('interval').value);
+        const interval = selectedInterval;
         const hardReload = document.getElementById('hardReload').checked;
         if (interval < 1) { alert('Mínimo 1s'); return; }
 
@@ -147,7 +147,7 @@ const AutoReloadModule = (function () {
         document.querySelectorAll('.preset-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const val = btn.getAttribute('data-value');
-                document.getElementById('interval').value = val;
+                selectedInterval = parseInt(val);
                 updatePresetActive(val);
                 const key = `autoReload_${currentTabId}`;
                 chrome.storage.local.get([key], (result) => {
@@ -156,7 +156,7 @@ const AutoReloadModule = (function () {
             });
         });
 
-        document.getElementById('interval').addEventListener('input', (e) => updatePresetActive(e.target.value));
+
 
         document.getElementById('hardReload').addEventListener('change', (e) => {
             const key = `autoReload_${currentTabId}`;

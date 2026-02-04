@@ -91,11 +91,7 @@ const KeepAliveModule = (function () {
             intervalSeconds = data.interval || 120;
             const pingCount = data.pingCount || 0;
 
-            // Sync custom interval input
-            const customInput = document.getElementById('kaCustomInterval');
-            if (customInput) {
-                customInput.value = Math.floor(intervalSeconds / 60);
-            }
+
 
             // Sync sound toggle
             const soundToggle = document.getElementById('kaSoundEnabled');
@@ -320,21 +316,12 @@ const KeepAliveModule = (function () {
                 const val = parseInt(btn.getAttribute('data-value'));
                 intervalSeconds = val;
                 updatePresetActive(val);
-                document.getElementById('kaCustomInterval').value = Math.floor(val / 60);
                 updateIntervalDisplay();
                 applyIntervalChange();
             });
         });
 
-        document.getElementById('kaCustomInterval').addEventListener('change', (e) => {
-            const mins = parseInt(e.target.value);
-            if (mins >= 1 && mins <= 60) {
-                intervalSeconds = mins * 60;
-                updatePresetActive(intervalSeconds);
-                updateIntervalDisplay();
-                applyIntervalChange();
-            }
-        });
+
 
         // Sound toggle listener
         document.getElementById('kaSoundEnabled').addEventListener('change', (e) => {
