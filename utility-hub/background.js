@@ -33,6 +33,45 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             }
         });
     }
+
+    // Keep-Alive alarm handler
+    if (alarm.name.startsWith('keepAlive_')) {
+        const tabIdStr = alarm.name.split('_')[1];
+        const tabId = parseInt(tabIdStr);
+
+        chrome.storage.local.get([alarm.name], (result) => {
+            const data = result[alarm.name];
+            if (data && data.active) {
+                // Execute ping script in the tab
+                chrome.scripting.executeScript({
+                    target: { tabId: tabId },
+                    func: () => {
+                        document.dispatchEvent(new MouseEvent('mousemove', {
+                            bubbles: true,
+                            clientX: Math.random() * 100,
+                            clientY: Math.random() * 100
+                        }));
+                        document.dispatchEvent(new KeyboardEvent('keydown', {
+                            bubbles: true,
+                            key: 'Shift'
+                        }));
+                        const url = window.location.href;
+                        const sep = url.indexOf('?') > -1 ? '&' : '?';
+                        fetch(url + sep + 'ka_bust=' + Date.now(), {
+                            credentials: 'include',
+                            method: 'GET'
+                        }).catch(() => { });
+                        console.log('🔁 Keep-alive ping at', new Date().toLocaleTimeString());
+                    }
+                }).catch(() => { });
+
+                // Update last ping
+                chrome.storage.local.set({
+                    [alarm.name]: { ...data, lastPing: Date.now() }
+                });
+            }
+        });
+    }
 });
 
 // Restaurar badges ao recarregar a extensão ou iniciar
