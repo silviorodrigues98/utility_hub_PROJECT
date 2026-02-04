@@ -24,6 +24,10 @@
         <button class="preset-btn" data-value="180">3m</button>
         <button class="preset-btn" data-value="300">5m</button>
     </div>
+    <div class="input-group" style="margin-top: 12px;">
+        <input type="number" id="kaCustomInterval" min="1" max="60" value="2" placeholder="Min">
+        <span class="unit">minutos</span>
+    </div>
 </div>
 
 <div class="card info-box">
@@ -44,35 +48,41 @@
 </button>
 
 <style>
-.keep-alive-status {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.status-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.status-label {
-    color: var(--text-muted);
-    font-size: 12px;
-}
-.status-value {
-    font-weight: 600;
-    font-size: 13px;
-}
-.status-value.active {
-    color: var(--success);
-}
-.status-value.inactive {
-    color: var(--text-muted);
-}
-.info-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11px;
-    color: var(--text-muted);
-}
+    .keep-alive-status {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .status-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .status-label {
+        color: var(--text-muted);
+        font-size: 12px;
+    }
+
+    .status-value {
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .status-value.active {
+        color: var(--success);
+    }
+
+    .status-value.inactive {
+        color: var(--text-muted);
+    }
+
+    .info-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        color: var(--text-muted);
+    }
 </style>

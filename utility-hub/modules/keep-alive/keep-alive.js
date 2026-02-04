@@ -167,25 +167,42 @@ const KeepAliveModule = (function () {
                 const val = parseInt(btn.getAttribute('data-value'));
                 intervalSeconds = val;
                 updatePresetActive(val);
-
-                const mins = Math.floor(val / 60);
-                document.getElementById('kaInterval').textContent = mins + ' min';
-
-                // If active, restart with new interval
-                const key = `keepAlive_${currentTabId}`;
-                chrome.storage.local.get([key], (result) => {
-                    if (result[key]?.active) {
-                        chrome.alarms.clear(key);
-                        chrome.alarms.create(key, {
-                            delayInMinutes: val / 60,
-                            periodInMinutes: val / 60
-                        });
-                        chrome.storage.local.set({
-                            [key]: { ...result[key], interval: val }
-                        });
-                    }
-                });
+                document.getElementById('kaCustomInterval').value = Math.floor(val / 60);
+                updateIntervalDisplay();
+                applyIntervalChange();
             });
+        });
+
+        // Custom interval input
+        document.getElementById('kaCustomInterval').addEventListener('change', (e) => {
+            const mins = parseInt(e.target.value);
+            if (mins >= 1 && mins <= 60) {
+                intervalSeconds = mins * 60;
+                updatePresetActive(intervalSeconds);
+                updateIntervalDisplay();
+                applyIntervalChange();
+            }
+        });
+    }
+
+    function updateIntervalDisplay() {
+        const mins = Math.floor(intervalSeconds / 60);
+        document.getElementById('kaInterval').textContent = mins + ' min';
+    }
+
+    function applyIntervalChange() {
+        const key = `keepAlive_${currentTabId}`;
+        chrome.storage.local.get([key], (result) => {
+            if (result[key]?.active) {
+                chrome.alarms.clear(key);
+                chrome.alarms.create(key, {
+                    delayInMinutes: intervalSeconds / 60,
+                    periodInMinutes: intervalSeconds / 60
+                });
+                chrome.storage.local.set({
+                    [key]: { ...result[key], interval: intervalSeconds }
+                });
+            }
         });
     }
 
