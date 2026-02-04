@@ -14,6 +14,26 @@ const UtilityHub = (function () {
 
         setupNavigation();
         renderHome();
+
+        if (currentTabId) {
+            checkActiveContext();
+        }
+    }
+
+    function checkActiveContext() {
+        const arKey = `autoReload_${currentTabId}`;
+        const kaKey = `keepAlive_${currentTabId}`;
+
+        chrome.storage.local.get([arKey, kaKey], (result) => {
+            const arData = result[arKey];
+            const kaData = result[kaKey];
+
+            if (arData && arData.active && modules['auto-reload']) {
+                loadModule(modules['auto-reload']);
+            } else if (kaData && kaData.active && modules['keep-alive']) {
+                loadModule(modules['keep-alive']);
+            }
+        });
     }
 
     function registerModule(module) {
