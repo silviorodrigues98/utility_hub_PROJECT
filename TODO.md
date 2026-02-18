@@ -25,3 +25,7 @@
 
 - [ ] Feature: Multi-signature support
     - [ ] Description: Allow users to save multiple signatures and choose which one to use via a dropdown or switch.
+    
+- [ ] Feature: Automatic signature on Enter
+    - [ ] Description: Automatically append the signature when the Enter key is pressed to send a message.
+    - [ ] Implementation: Intercept the Enter key event, append the signature to the input field, and then trigger the send action.
