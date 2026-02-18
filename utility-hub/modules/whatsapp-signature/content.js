@@ -10,6 +10,14 @@
         observer = new MutationObserver(handleMutations);
         observer.observe(document.body, { childList: true, subtree: true });
 
+        // Keyboard shortcut listener (Alt + S)
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                appendSignatureToInput();
+            }
+        });
+
         // Initial check
         injectButton();
     }
