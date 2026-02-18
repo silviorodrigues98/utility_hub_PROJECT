@@ -12,10 +12,11 @@
     - [x] Implementation: Update the state management logic to automatically deactivate the current feature when a new one is enabled.
 
 - [x] Documentation: Update README.md
-    - [ ] Description: Update the project's README to reflect the recent fixes and features.
+    - [x] Description: Update the project's README to reflect the recent fixes and features.
 
-- [ ] Feature: DOM change monitor
-    - [ ] Description: Create a module to monitor specific page elements via CSS selectors and send notifications when updates occur.
+- [ ] Feature: DOM change monitor (TEMPORARILY DISABLED)
+    - [ ] Issue: Module is currently non-functional and has been hidden from the UI.
+    - [ ] Task: Debug and fix the mutation observer logic and notification system.
     - [ ] Use Case: Monitoring new messages in web-based chat applications like WhatsApp.
 
 - [x] Feature: WhatsApp Message Signature
@@ -26,6 +27,6 @@
 - [ ] Feature: Multi-signature support
     - [ ] Description: Allow users to save multiple signatures and choose which one to use via a dropdown or switch.
     
-- [ ] Feature: Automatic signature on Enter
-    - [ ] Description: Automatically append the signature when the Enter key is pressed to send a message.
-    - [ ] Implementation: Intercept the Enter key event, append the signature to the input field, and then trigger the send action.
+- [x] Feature: Automatic signature on Enter
+    - [x] Description: Automatically append the signature when the Enter key is pressed to send a message.
+    - [x] Implementation: Intercept the Enter key event, append the signature to the input field, and then trigger the send action.
