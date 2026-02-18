@@ -1,0 +1,67 @@
+<div class="module-container">
+    <div class="info-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Adicione assinaturas automáticas às suas mensagens no WhatsApp Web.</span>
+    </div>
+
+    <div class="setting-group">
+        <label class="setting-label">Sua Assinatura</label>
+        <textarea id="sigText" class="sig-input" placeholder="Ex: — Silvio">─ ꜱɪʟᴠɪᴏ</textarea>
+    </div>
+
+    <div class="setting-group" style="margin-top: 15px;">
+        <label class="setting-label">Opções</label>
+        <div class="toggle-item">
+            <span>Auto-anexar</span>
+            <label class="switch">
+                <input type="checkbox" id="sigAutoAppend">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="action-section" style="margin-top: 20px;">
+        <button id="sigAppendBtn" class="primary-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Anexar Agora</span>
+        </button>
+    </div>
+
+    <div id="sigToast" class="ka-toast"></div>
+</div>
+
+<style>
+    .sig-input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: var(--text);
+        padding: 10px;
+        font-family: inherit;
+        font-size: 13px;
+        resize: vertical;
+        min-height: 60px;
+        margin-top: 8px;
+    }
+    .sig-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.08);
+    }
+    .toggle-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+</style>
